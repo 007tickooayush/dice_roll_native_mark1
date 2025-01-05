@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react';
 import {
 	ImageSourcePropType,
+	Pressable,
 	StatusBar,
 	Text,
 	View,
@@ -17,11 +18,46 @@ import Dice from './Dice';
 
 function App(): React.JSX.Element {
 	const [diceImage, setDiceImage] = useState<ImageSourcePropType>(DiceOne);
+
+	const performDiceRollRandom = () => {
+		let randomNum = Math.floor(Math.random() * 6) + 1;
+		switch (randomNum) {
+			case 1:
+				setDiceImage(DiceOne);
+				break;
+			case 2:
+				setDiceImage(DiceTwo);
+				break;
+			case 3:
+				setDiceImage(DiceThr);
+				break;
+			case 4:
+				setDiceImage(DiceFor);
+				break;
+			case 5:
+				setDiceImage(DiceFiv);
+				break;
+			case 6:
+				setDiceImage(DiceSix);
+				break;
+			default:
+				setDiceImage(DiceOne);
+				break;
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<StatusBar backgroundColor={bgColor}/>
-			<Text>This is some text</Text>
 			<Dice imageUrl={diceImage} />
+			<Pressable
+				style={styles.rollBtnText}
+				onPress={performDiceRollRandom}
+			>
+				<Text>
+					Roll the Dice
+				</Text>
+			</Pressable>
 		</View>
 	);
 }
