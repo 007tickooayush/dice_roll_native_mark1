@@ -6,6 +6,7 @@ import {
 	Text,
 	View,
 } from 'react-native';
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
 import DiceOne from '../_assets/One.png';
 import DiceTwo from '../_assets/Two.png';
@@ -43,12 +44,19 @@ function App(): React.JSX.Element {
 			default:
 				setDiceImage(DiceOne);
 				break;
-		}
+		};
+
+		const options = {
+			enableVibrateFallback: true,
+			ignoreAndroidSystemSettings: false 
+		};
+		ReactNativeHapticFeedback.trigger("impactMedium", options)
+
 	};
 
 	return (
 		<View style={styles.container}>
-			<StatusBar backgroundColor={bgColor}/>
+			<StatusBar backgroundColor={bgColor} />
 			<Dice imageUrl={diceImage} />
 			<Pressable
 				style={styles.rollBtnText}
